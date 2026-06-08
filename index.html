@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMKN 8 Wajo - Website Sekolah Premium</title>
+    
+    <!-- Google Fonts: Sora (Sleek & Modern) & Russo One (Bold Display) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons for High Quality Visuals -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind Config for Theme Alignment with "Gerold" -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sora: ['Sora', 'sans-serif'],
+                        russo: ['Russo One', 'sans-serif'],
+                    },
+                    colors: {
+                        themeDark: '#0f0715',
+                        themeDarker: '#050209',
+                        themeCard: '#140c1c',
+                        themeAccent: '#8750f7',
+                        themeAccentHover: '#9a6cf8',
+                        themeSecondary: '#2a1454',
+                        themeGold: '#ff9c00',
+                        themeLightText: '#f3effc',
+                        themeMutedText: '#9f92b7',
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(135, 80, 247, 0.3)',
+                        'neon-strong': '0 0 35px rgba(135, 80, 247, 0.6)',
+                        'gold-glow': '0 0 20px rgba(255, 156, 0, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Sora', sans-serif;
+            background-color: #0f0715;
+            color: #f3effc;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar styled matching the dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050209;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8750f7;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9a6cf8;
+        }
+
+        /* Ambient glowing background circles inspired by Gerold */
+        .ambient-glow-1 {
+            background: radial-gradient(circle, rgba(135, 80, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(40px);
+        }
+        .ambient-glow-2 {
+            background: radial-gradient(circle, rgba(255, 156, 0, 0.08) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px);
+        }
+
+        /* Hover border animation gradient */
+        .animated-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(20, 12, 28, 0.9) 0%, rgba(10, 5, 15, 0.9) 100%);
+            border: 1px solid rgba(135, 80, 247, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .animated-card:hover {
+            border-color: #8750f7;
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(135, 80, 247, 0.25);
+        }
+
+        /* Animated glowing line under section titles */
+        .glow-line {
+            height: 3px;
+            background: linear-gradient(90deg, #8750f7 0%, #ff9c00 50%, transparent 100%);
+            width: 120px;
+            border-radius: 2px;
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050209;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        /* Spinning loader matching Gerold brand colors */
+        .loader-ring {
+            border: 4px solid rgba(135, 80, 247, 0.1);
+            border-top: 4px solid #8750f7;
+            border-right: 4px solid #ff9c00;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="text-center">
+            <div class="loader-ring mx-auto mb-4"></div>
+            <h2 class="font-russo text-xl tracking-wider text-[#8750f7] animate-pulse">SMKN 8 WAJO</h2>
+            <p class="text-sm text-themeMutedText mt-1">Mempersiapkan Masa Depan Unggul...</p>
+        </div>
+    </div>
+
+    <!-- AMBIENT EFFECTS -->
+    <div class="absolute top-0 left-1/4 w-[600px] h-[600px] ambient-glow-1 pointer-events-none z-0"></div>
+    <div class="absolute top-1/2 right-10 w-[500px] h-[500px] ambient-glow-2 pointer-events-none z-0"></div>
+    <div class="absolute bottom-10 left-10 w-[550px] h-[550px] ambient-glow-1 pointer-events-none z-0"></div>
+
+    <!-- HEADER & NAVIGATION -->
+    <header class="fixed top-0 w-full z-50 transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 sm:h-24 transition-all duration-300" id="header-inner">
+                <!-- Branding / Logo -->
+                <a href="#beranda" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-themeAccent to-themeGold p-[2px] shadow-neon transition-transform duration-300 group-hover:scale-105">
+                        <div class="w-full h-full bg-[#050209] rounded-[10px] flex items-center justify-center">
+                            <!-- High fidelity representation of School crest (SVG Vector style) -->
+                            <svg class="w-8 h-8 text-[#8750f7]" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="block font-russo text-xl text-themeLightText tracking-wide group-hover:text-themeAccent transition-colors">SMKN 8 WAJO</span>
+                        <span class="block text-[10px] text-themeMutedText uppercase tracking-widest -mt-1">Creative & Technology School</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#beranda" class="text-sm font-semibold text-themeLightText hover:text-themeAccent transition-colors">Beranda</a>
+                    <a href="#profil" class="text-sm font-semibold text-themeLightText hover:text-themeAccent transition-colors">Profil</a>
+                    <a href="#jurusan" class="text-sm font-semibold text-themeLightText hover:text-themeAccent transition-colors">Jurusan</a>
+                    <a href="#prestasi" class="text-sm font-semibold text-themeLightText hover:text-themeAccent transition-colors">Prestasi</a>
+                    <a href="#ppdb" class="text-sm font-semibold text-themeLightText hover:text-themeAccent transition-colors">PPDB</a>
+                    <a href="#kontak" class="text-sm font-semibold text-themeLightText hover:text-themeAccent transition-colors">Hubungi</a>
+                </nav>
+
+                <!-- CTA Button - PPDB -->
+                <div class="hidden md:block">
+                    <a href="#ppdb" class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-bold text-themeLightText rounded-full group bg-gradient-to-br from-themeAccent to-themeGold hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-800">
+                        <span class="relative px-6 py-2.5 transition-all ease-in duration-75 bg-themeDark rounded-full group-hover:bg-opacity-0">
+                            Daftar PPDB 2026/2027
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu toggle -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-themeLightText focus:outline-none p-2 rounded-lg bg-themeCard border border-themeSecondary/40">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a0512]/95 backdrop-blur-xl border-b border-themeSecondary/30 px-4 pt-4 pb-6 space-y-3">
+            <a href="#beranda" class="block py-2.5 px-4 rounded-xl text-themeLightText hover:bg-themeSecondary/40 hover:text-themeAccent transition-all">Beranda</a>
+            <a href="#profil" class="block py-2.5 px-4 rounded-xl text-themeLightText hover:bg-themeSecondary/40 hover:text-themeAccent transition-all">Profil</a>
+            <a href="#jurusan" class="block py-2.5 px-4 rounded-xl text-themeLightText hover:bg-themeSecondary/40 hover:text-themeAccent transition-all">Jurusan</a>
+            <a href="#prestasi" class="block py-2.5 px-4 rounded-xl text-themeLightText hover:bg-themeSecondary/40 hover:text-themeAccent transition-all">Prestasi</a>
+            <a href="#ppdb" class="block py-2.5 px-4 rounded-xl text-themeLightText hover:bg-themeSecondary/40 hover:text-themeAccent transition-all">PPDB Simulator</a>
+            <a href="#kontak" class="block py-2.5 px-4 rounded-xl text-themeLightText hover:bg-themeSecondary/40 hover:text-themeAccent transition-all">Hubungi</a>
+            <div class="pt-4 px-4">
+                <a href="#ppdb" class="w-full text-center block py-3 px-6 rounded-full bg-gradient-to-r from-themeAccent to-themeGold font-bold text-themeDark text-sm hover:opacity-90 shadow-neon">Daftar Sekarang</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (Sleek Dark Portfolio Concept) -->
+    <section id="beranda" class="relative pt-36 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column text intro -->
+                <div class="lg:col-span-7 text-left space-y-6">
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-themeSecondary text-[#a37bf9] border border-themeAccent/30 shadow-neon">
+                        <i class="fa-solid fa-graduation-cap"></i> Pusat Keunggulan Vokasi & Teknologi
+                    </span>
+                    
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-none">
+                        Membangun Kompetensi <br>
+                        <span class="bg-gradient-to-r from-[#8750f7] to-themeGold bg-clip-text text-transparent drop-shadow-sm">
+                            Generasi Kreatif & Digital
+                        </span>
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-themeMutedText max-w-2xl font-light leading-relaxed">
+                        Selamat datang di SMKN 8 Wajo. Pusat pendidikan kejuruan yang melahirkan tenaga ahli berkompeten, inovatif, dan siap bersaing secara global di dunia usaha serta industri kreatif.
+                    </p>
+
+                    <!-- Interactive CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                        <a href="#ppdb" class="px-8 py-4 rounded-full bg-themeAccent hover:bg-themeAccentHover text-white text-center font-bold text-sm shadow-neon transition-all duration-300 transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-user-plus mr-2"></i> Pendaftaran PPDB Online
+                        </a>
+                        <a href="#jurusan" class="px-8 py-4 rounded-full bg-transparent border border-[#8750f7]/40 hover:border-themeAccent text-themeLightText text-center font-semibold text-sm transition-all duration-300 hover:bg-themeSecondary/20">
+                            Jelajahi Kompetensi <i class="fa-solid fa-arrow-right ml-2 text-xs text-themeAccent"></i>
+                        </a>
+                    </div>
+
+                    <!-- Trust Metrics Badges -->
+                    <div class="pt-8 border-t border-themeSecondary/30 grid grid-cols-3 gap-4">
+                        <div>
+                            <h3 class="text-3xl font-russo text-themeGold">A</h3>
+                            <p class="text-xs text-themeMutedText uppercase tracking-wider">Akreditasi Sekolah</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-russo text-themeLightText" id="siswa-counter">850+</h3>
+                            <p class="text-xs text-themeMutedText uppercase tracking-wider">Siswa Aktif</p>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-russo text-themeLightText">98%</h3>
+                            <p class="text-xs text-themeMutedText uppercase tracking-wider">Lulus Terdistribusi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Visual Showcase (Like a premium portfolio layout) -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative w-full max-w-md mx-auto aspect-square rounded-3xl overflow-hidden p-[3px] bg-gradient-to-tr from-themeAccent via-themeSecondary to-themeGold shadow-neon-strong">
+                        <div class="w-full h-full bg-[#11071e] rounded-[22px] overflow-hidden relative flex items-center justify-center">
+                            <!-- Visual Graphic simulating high technology center -->
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600" alt="Siswa SMKN 8 Wajo" class="w-full h-full object-cover opacity-60 mix-blend-lighten" onerror="this.onerror=null; this.src='https://placehold.co/600x600/140c1c/8750f7?text=SMKN+8+Wajo';">
+                            
+                            <!-- Overlapping glowing school detail card -->
+                            <div class="absolute bottom-6 left-6 right-6 p-5 bg-[#0f0715]/90 backdrop-blur-md rounded-2xl border border-themeAccent/20 flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-themeAccent/20 flex items-center justify-center text-themeAccent text-xl">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-themeLightText">Teaching Factory Terpadu</h4>
+                                    <p class="text-xs text-themeMutedText">Pembelajaran adaptif berbasis industri nyata.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROFILE & VISI MISI SECTION -->
+    <section id="profil" class="py-20 border-t border-themeSecondary/30 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-sm font-semibold text-themeAccent uppercase tracking-widest block mb-2">Profil Sekolah</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-russo tracking-wide">Mengenal SMKN 8 Wajo</h2>
+                <div class="glow-line mx-auto mt-4"></div>
+                <p class="text-themeMutedText mt-4 font-light">Kami berkomitmen menciptakan lingkungan pembelajaran kondusif, berteknologi tinggi, serta menjunjung tinggi nilai ketakwaan dan etika profesional.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Visi & Misi Card -->
+                <div class="animated-card p-8 rounded-3xl space-y-6">
+                    <div class="flex items-center gap-4 border-b border-themeSecondary/40 pb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-themeAccent/20 flex items-center justify-center text-themeAccent text-xl">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-russo text-white tracking-wide">Visi Sekolah</h3>
+                    </div>
+                    <p class="text-themeMutedText italic font-light leading-relaxed">
+                        "Menjadi institusi pendidikan vokasi unggulan yang menghasilkan lulusan mandiri, berkarakter mulia, menguasai ilmu teknologi, serta profesional yang tersertifikasi internasional."
+                    </p>
+                </div>
+
+                <div class="animated-card p-8 rounded-3xl space-y-6">
+                    <div class="flex items-center gap-4 border-b border-themeSecondary/40 pb-4">
+                        <div class="w-12 h-12 rounded-2xl bg-themeGold/20 flex items-center justify-center text-themeGold text-xl">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-russo text-white tracking-wide">Misi Sekolah</h3>
+                    </div>
+                    <ul class="space-y-3 text-themeMutedText text-sm font-light">
+                        <li class="flex items-start gap-3">
+                            <span class="text-themeAccent mt-1"><i class="fa-solid fa-check-circle"></i></span>
+                            <span>Menyelenggarakan pembelajaran berbasis kompetensi sesuai tuntutan dunia industri terkemuka.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-themeAccent mt-1"><i class="fa-solid fa-check-circle"></i></span>
+                            <span>Mengintegrasikan nilai keagamaan, budi pekerti luhur, dan disiplin tinggi dalam kehidupan sekolah.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-themeAccent mt-1"><i class="fa-solid fa-check-circle"></i></span>
+                            <span>Menjalin kemitraan global yang strategis dengan berbagai instansi dalam menyalurkan lulusan.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Sambutan Kepala Sekolah -->
+            <div class="mt-16 bg-[#140c1c]/80 border border-themeSecondary/30 p-8 sm:p-12 rounded-3xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-4 text-center">
+                    <div class="w-36 h-36 rounded-full overflow-hidden p-1 bg-gradient-to-br from-themeAccent to-themeGold mx-auto mb-4">
+                        <div class="w-full h-full bg-[#140c1c] rounded-full overflow-hidden">
+                            <!-- Simulating Headmaster photo -->
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200" alt="Kepala Sekolah SMKN 8 Wajo" class="w-full h-full object-cover object-top" onerror="this.onerror=null; this.src='https://placehold.co/300x300/140c1c/8750f7?text=Kepala+Sekolah';">
+                        </div>
+                    </div>
+                    <h4 class="font-bold text-lg text-white">Drs. H. Mamat, M.Pd</h4>
+                    <p class="text-xs text-themeAccent font-semibold uppercase tracking-widest">Kepala SMKN 8 Wajo</p>
+                </div>
+                <div class="lg:col-span-8 space-y-4">
+                    <span class="text-4xl text-themeGold font-russo">“</span>
+                    <p class="text-sm sm:text-base text-themeMutedText font-light leading-relaxed -mt-4 italic">
+                        "Pendidikan adalah paspor masa depan, untuk hari esok yang dimiliki oleh orang-orang yang mempersiapkannya hari ini. Di SMKN 8 Wajo, kami menyediakan fasilitas, kurikulum, dan pendampingan terbaik agar siswa-siswi kami siap melangkah dengan percaya diri menuju kesuksesan karir ataupun akademik mereka."
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- DEPARTMENTS / JURUSAN SHOWCASE -->
+    <section id="jurusan" class="py-20 bg-themeDarker relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-sm font-semibold text-themeAccent uppercase tracking-widest block mb-2">Pilihan Karir & Masa Depan</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-russo tracking-wide">Kompetensi Keahlian</h2>
+                <div class="glow-line mx-auto mt-4"></div>
+                <p class="text-themeMutedText mt-4 font-light">Pilihlah jalur keahlian terbaik sesuai dengan minat dan bakat kreatif atau teknismu demi masa depan gemilang.</p>
+            </div>
+
+            <!-- Department Navigation Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <button onclick="switchDepartment('rpl')" class="dept-tab-btn active px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border border-themeAccent bg-themeAccent text-white" id="tab-rpl">
+                    <i class="fa-solid fa-code mr-2"></i> Rekayasa Perangkat Lunak
+                </button>
+                <button onclick="switchDepartment('tkj')" class="dept-tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border border-themeSecondary/50 bg-[#140c1c] text-themeMutedText hover:border-themeAccent/50" id="tab-tkj">
+                    <i class="fa-solid fa-network-wired mr-2"></i> Teknik Komputer & Jaringan
+                </button>
+                <button onclick="switchDepartment('akl')" class="dept-tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border border-themeSecondary/50 bg-[#140c1c] text-themeMutedText hover:border-themeAccent/50" id="tab-akl">
+                    <i class="fa-solid fa-calculator mr-2"></i> Akuntansi & Keuangan
+                </button>
+                <button onclick="switchDepartment('tbsm')" class="dept-tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border border-themeSecondary/50 bg-[#140c1c] text-themeMutedText hover:border-themeAccent/50" id="tab-tbsm">
+                    <i class="fa-solid fa-motorcycle mr-2"></i> Otomotif / TBSM
+                </button>
+            </div>
+
+            <!-- Department Display Card (Dynamic Content managed by Javascript) -->
+            <div class="bg-[#140c1c] border border-themeSecondary/40 rounded-3xl p-6 sm:p-10 transition-all duration-500" id="dept-display-container">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <!-- Text Info Column -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <span id="dept-badge" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#ff9c00]/20 text-themeGold border border-[#ff9c00]/30 inline-block">Unggulan Digital</span>
+                        <h3 id="dept-title" class="text-2xl sm:text-3xl font-bold font-russo text-white tracking-wide">Rekayasa Perangkat Lunak (RPL)</h3>
+                        <p id="dept-desc" class="text-sm sm:text-base text-themeMutedText font-light leading-relaxed">
+                            Mempelajari pengembangan perangkat lunak mulai dari pembuatan website, aplikasi mobile, desktop, hingga pengembangan kecerdasan buatan. Siswa dipersiapkan menghadapi tantangan era Web3 dan Revolusi Industri 4.0.
+                        </p>
+                        
+                        <div class="border-t border-themeSecondary/40 pt-6">
+                            <h4 class="font-semibold text-white mb-3">Materi Pembelajaran Unggulan:</h4>
+                            <div class="grid grid-cols-2 gap-3 text-xs sm:text-sm text-themeMutedText" id="dept-topics">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-themeAccent"></i> Web & Mobile Dev</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-themeAccent"></i> Database Management</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-themeAccent"></i> UI/UX Design</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-themeAccent"></i> OOP Programming</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex flex-wrap gap-4 items-center">
+                            <span class="text-xs text-themeLightText font-bold">Peluang Karir:</span>
+                            <div class="flex flex-wrap gap-2 text-xs" id="dept-jobs">
+                                <span class="px-3 py-1 bg-themeSecondary/50 text-themeLightText rounded-md border border-themeAccent/20">Fullstack Web Developer</span>
+                                <span class="px-3 py-1 bg-themeSecondary/50 text-themeLightText rounded-md border border-themeAccent/20">Mobile Engineer</span>
+                                <span class="px-3 py-1 bg-themeSecondary/50 text-themeLightText rounded-md border border-themeAccent/20">UI/UX Designer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media/Visual Showcase Column -->
+                    <div class="lg:col-span-5">
+                        <div class="relative rounded-2xl overflow-hidden aspect-video sm:aspect-square bg-themeDark border border-themeSecondary/50 shadow-neon">
+                            <img id="dept-image" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=500" alt="RPL Showcase" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/500x500/140c1c/8750f7?text=RPL';">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE PPDB ONLINE SIMULATOR -->
+    <section id="ppdb" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-sm font-semibold text-themeGold uppercase tracking-widest block mb-2">Simulasi Mandiri</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-russo tracking-wide">Simulator Kelayakan PPDB</h2>
+                <div class="glow-line mx-auto mt-4"></div>
+                <p class="text-themeMutedText mt-4 font-light">Ketahui peluang kelulusanmu di berbagai jurusan favorit SMKN 8 Wajo secara instan berdasarkan nilai rapor SMP/MTs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Simulator Input Form (7 Cols) -->
+                <div class="lg:col-span-7 bg-[#140c1c] border border-themeSecondary/40 p-6 sm:p-8 rounded-3xl space-y-6">
+                    <h3 class="text-xl font-bold text-white font-russo mb-4"><i class="fa-solid fa-sliders text-themeAccent mr-2"></i> Input Nilai Rapor (Skala 1-100)</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-themeLightText uppercase tracking-wider mb-2">Matematika</label>
+                            <input type="number" id="val-mat" min="0" max="100" placeholder="Contoh: 85" class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-themeAccent focus:ring-1 focus:ring-themeAccent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-themeLightText uppercase tracking-wider mb-2">Bahasa Inggris</label>
+                            <input type="number" id="val-ing" min="0" max="100" placeholder="Contoh: 80" class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-themeAccent focus:ring-1 focus:ring-themeAccent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-themeLightText uppercase tracking-wider mb-2">IPA (Sains)</label>
+                            <input type="number" id="val-ipa" min="0" max="100" placeholder="Contoh: 78" class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-themeAccent focus:ring-1 focus:ring-themeAccent transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-themeLightText uppercase tracking-wider mb-2">Bahasa Indonesia</label>
+                            <input type="number" id="val-ind" min="0" max="100" placeholder="Contoh: 90" class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-themeAccent focus:ring-1 focus:ring-themeAccent transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-themeLightText uppercase tracking-wider mb-2">Pilihan Jurusan yang Diinginkan</label>
+                        <select id="sim-dept-select" class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-themeAccent transition-all">
+                            <option value="rpl">Rekayasa Perangkat Lunak (Min. Rata-rata 80)</option>
+                            <option value="tkj">Teknik Komputer & Jaringan (Min. Rata-rata 78)</option>
+                            <option value="akl">Akuntansi & Keuangan (Min. Rata-rata 75)</option>
+                            <option value="tbsm">Teknik Bisnis Sepeda Motor (Min. Rata-rata 73)</option>
+                        </select>
+                    </div>
+
+                    <button onclick="calculatePPDB()" class="w-full py-4 rounded-xl bg-gradient-to-r from-themeAccent to-themeGold font-bold text-themeDark text-sm hover:opacity-95 shadow-neon transition-all">
+                        <i class="fa-solid fa-calculator mr-2"></i> Hitung Peluang Kelayakan
+                    </button>
+                </div>
+
+                <!-- Simulator Output Result Indicator (5 Cols) -->
+                <div class="lg:col-span-5 bg-gradient-to-b from-[#140c1c] to-[#20132a]/30 border border-themeSecondary/40 p-6 sm:p-8 rounded-3xl h-full flex flex-col justify-between text-center min-h-[350px]">
+                    <div>
+                        <h3 class="text-lg font-bold text-white font-russo mb-4">Hasil Simulasi</h3>
+                        <div class="glow-line mx-auto mb-6"></div>
+                    </div>
+
+                    <!-- Interactive dynamic result view -->
+                    <div id="sim-result-default" class="space-y-4 py-8">
+                        <div class="text-5xl text-themeMutedText"><i class="fa-solid fa-graduation-cap animate-bounce"></i></div>
+                        <p class="text-sm text-themeMutedText">Masukkan data nilai rapor kamu di sebelah kiri lalu klik "Hitung Peluang Kelayakan" untuk melihat analisis lengkap.</p>
+                    </div>
+
+                    <div id="sim-result-active" class="hidden space-y-6 py-4">
+                        <div class="mx-auto w-32 h-32 rounded-full flex items-center justify-center border-4" id="sim-score-border">
+                            <div class="text-center">
+                                <span class="block text-3xl font-russo text-white" id="sim-score-val">0.0</span>
+                                <span class="text-[10px] text-themeMutedText uppercase tracking-wider">Rata-rata</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="px-4 py-1.5 rounded-full text-xs font-bold" id="sim-status-badge">MEMENUHI SYARAT</span>
+                            <p class="text-xs text-themeMutedText mt-4" id="sim-feedback-text">Selamat! Nilaimu sangat baik untuk mendaftar di Kompetensi Keahlian Rekayasa Perangkat Lunak.</p>
+                        </div>
+
+                        <div class="pt-4">
+                            <a href="https://ppdb.sulselprov.go.id" target="_blank" class="text-xs font-bold text-[#ff9c00] hover:underline uppercase tracking-widest">
+                                Lanjut Daftar Online Resmi <i class="fa-solid fa-external-link ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRESTASI, BERITA, & LOGO PARTNER -->
+    <section id="prestasi" class="py-20 bg-themeDarker relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-sm font-semibold text-themeAccent uppercase tracking-widest block mb-2">Informasi & Kabar Terkini</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-russo tracking-wide">Prestasi & Berita Terbaru</h2>
+                <div class="glow-line mx-auto mt-4"></div>
+            </div>
+
+            <!-- Blog/News Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- News Card 1 -->
+                <div class="animated-card rounded-3xl overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-themeDark">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=400" alt="News 1" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x250/140c1c/8750f7?text=Prestasi+1';">
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-themeAccent text-white text-xs font-bold rounded-full">Juara I</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <span class="text-xs text-themeMutedText"><i class="fa-solid fa-calendar mr-1"></i> 12 Mei 2026</span>
+                            <h4 class="font-bold text-lg text-white hover:text-themeAccent transition-colors">Juara 1 Lomba LKS Bidang Web Technologies Tingkat Provinsi</h4>
+                            <p class="text-xs text-themeMutedText font-light line-clamp-3">Siswa RPL SMKN 8 Wajo berhasil meraih peringkat utama dalam Lomba Kompetensi Siswa (LKS) tingkat provinsi tahun ini.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="alertModal('LKS Web Technologies', 'Siswa RPL SMKN 8 Wajo berhasil membawa pulang medali emas berkat rancangan web interaktif berbasis arsitektur SPA yang memukau para juri.')" class="text-xs font-semibold text-themeAccent hover:text-[#9a6cf8] transition-colors">Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+
+                <!-- News Card 2 -->
+                <div class="animated-card rounded-3xl overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-themeDark">
+                            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=400" alt="News 2" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x250/140c1c/8750f7?text=Uji+Kompetensi';">
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-[#ff9c00] text-themeDark text-xs font-bold rounded-full">Akademik</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <span class="text-xs text-themeMutedText"><i class="fa-solid fa-calendar mr-1"></i> 08 Mei 2026</span>
+                            <h4 class="font-bold text-lg text-white hover:text-themeAccent transition-colors">Uji Kompetensi Keahlian (UKK) Mandiri Sukses Terlaksana</h4>
+                            <p class="text-xs text-themeMutedText font-light line-clamp-3">Bekerjasama dengan berbagai industri teknologi global, seluruh siswa kelas XII sukses menyelesaikan UKK bersertifikasi resmi.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="alertModal('UKK Mandiri 2026', 'UKK dilaksanakan secara kolaboratif bersama asesor eksternal dari perusahaan software dan jaringan terkemuka demi menguji kesiapan kerja siswa.')" class="text-xs font-semibold text-themeAccent hover:text-[#9a6cf8] transition-colors">Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+
+                <!-- News Card 3 -->
+                <div class="animated-card rounded-3xl overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-themeDark">
+                            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=400" alt="News 3" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/400x250/140c1c/8750f7?text=Kerjasama+Industri';">
+                            <span class="absolute top-4 left-4 px-3 py-1 bg-[#2a1454] text-[#a37bf9] text-xs font-bold border border-themeAccent/20 rounded-full">Kemitraan</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <span class="text-xs text-themeMutedText"><i class="fa-solid fa-calendar mr-1"></i> 25 April 2026</span>
+                            <h4 class="font-bold text-lg text-white hover:text-themeAccent transition-colors">MoU Bersama 5 Industri Skala Nasional untuk Magang Kerja</h4>
+                            <p class="text-xs text-themeMutedText font-light line-clamp-3">SMKN 8 Wajo kembali melebarkan sayap kemitraan guna mempermudah akses program magang (Prakerin) dan penyerapan kerja alumni.</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button onclick="alertModal('MoU Kemitraan Strategis', 'Melalui penandatanganan kesepakatan baru ini, siswa dipastikan memperoleh prioritas rekruitmen di korporasi bidang IT dan Teknik Mesin.')" class="text-xs font-semibold text-themeAccent hover:text-[#9a6cf8] transition-colors">Baca Selengkapnya <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Partners Area (Skills/Tools equivalent) -->
+            <div class="mt-20 border-t border-themeSecondary/30 pt-16">
+                <h4 class="text-center text-xs font-semibold text-themeMutedText uppercase tracking-widest mb-10">Kemitraan & Penyaluran Kerja Dunia Usaha / Industri</h4>
+                <div class="flex flex-wrap items-center justify-around gap-8 opacity-60">
+                    <span class="font-russo text-lg sm:text-xl text-themeLightText hover:opacity-100 transition-opacity"><i class="fa-solid fa-laptop mr-2 text-themeAccent"></i> ASTRA GROUP</span>
+                    <span class="font-russo text-lg sm:text-xl text-themeLightText hover:opacity-100 transition-opacity"><i class="fa-solid fa-server mr-2 text-themeGold"></i> TELKOM INDONESIA</span>
+                    <span class="font-russo text-lg sm:text-xl text-themeLightText hover:opacity-100 transition-opacity"><i class="fa-solid fa-code mr-2 text-themeAccent"></i> AXIOO CLASS</span>
+                    <span class="font-russo text-lg sm:text-xl text-themeLightText hover:opacity-100 transition-opacity"><i class="fa-solid fa-user-shield mr-2 text-themeGold"></i> ORACLE ACADEMY</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION (Gerold Premium Form Style) -->
+    <section id="kontak" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Contact info details (5 cols) -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-sm font-semibold text-themeAccent uppercase tracking-widest block mb-2">Hubungi Kami</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-russo tracking-wide">Mari Berdiskusi</h2>
+                        <div class="glow-line mt-4"></div>
+                    </div>
+                    <p class="text-themeMutedText font-light leading-relaxed">
+                        Butuh informasi lebih mendalam terkait program keahlian, sarana prasarana, atau kolaborasi industri? Tim representatif kami siap membantumu.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-themeSecondary/60 flex items-center justify-center text-themeAccent text-xl border border-themeAccent/20">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-semibold text-themeMutedText uppercase">Telepon / WhatsApp</h5>
+                                <p class="text-sm text-themeLightText font-bold">+62 823-4567-8901</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-themeSecondary/60 flex items-center justify-center text-themeAccent text-xl border border-themeAccent/20">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-semibold text-themeMutedText uppercase">Surel Elektronik</h5>
+                                <p class="text-sm text-themeLightText font-bold">info@smkn8wajo.sch.id</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-themeSecondary/60 flex items-center justify-center text-themeAccent text-xl border border-themeAccent/20">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-xs font-semibold text-themeMutedText uppercase">Alamat Utama</h5>
+                                <p class="text-sm text-themeLightText font-bold">Jl. Poros Sengkang - Sidrap, Kabupaten Wajo, Sulawesi Selatan</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Message Form (7 cols) -->
+                <div class="lg:col-span-7 bg-[#140c1c] border border-themeSecondary/40 p-8 rounded-3xl space-y-6 shadow-neon">
+                    <h3 class="text-xl font-bold text-white font-russo">Kirim Pesan Langsung</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <input type="text" required placeholder="Nama Lengkap" class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-themeAccent focus:ring-1 focus:ring-themeAccent transition-all text-sm">
+                            </div>
+                            <div>
+                                <input type="email" required placeholder="Alamat Surel" class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-themeAccent focus:ring-1 focus:ring-themeAccent transition-all text-sm">
+                            </div>
+                        </div>
+                        <div>
+                            <input type="text" required placeholder="Subjek Pertanyaan" class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-themeAccent focus:ring-1 focus:ring-themeAccent transition-all text-sm">
+                        </div>
+                        <div>
+                            <textarea rows="5" required placeholder="Tuliskan pesan atau pertanyaan Anda di sini secara detail..." class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-themeAccent focus:ring-1 focus:ring-themeAccent transition-all text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 rounded-xl bg-themeAccent hover:bg-themeAccentHover text-white font-bold text-sm shadow-neon transition-all">
+                            Kirim Pesan Sekarang <i class="fa-solid fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER AREA -->
+    <footer class="bg-themeDarker border-t border-themeSecondary/40 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+                
+                <!-- School Info Column -->
+                <div class="md:col-span-5 space-y-4">
+                    <a href="#" class="flex items-center space-x-3">
+                        <span class="font-russo text-2xl text-themeLightText tracking-wide">SMKN 8 WAJO</span>
+                    </a>
+                    <p class="text-xs text-themeMutedText max-w-sm leading-relaxed">
+                        Institusi kejuruan berdedikasi tinggi demi memajukan kompetensi digital, rekayasa perangkat lunak, dan keahlian terapan di wilayah Wajo serta sekitarnya.
+                    </p>
+                    <div class="flex gap-3 text-sm pt-2">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-themeCard border border-themeSecondary/50 flex items-center justify-center text-[#ff9c00] hover:bg-themeAccent hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-themeCard border border-themeSecondary/50 flex items-center justify-center text-[#ff9c00] hover:bg-themeAccent hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-themeCard border border-themeSecondary/50 flex items-center justify-center text-[#ff9c00] hover:bg-themeAccent hover:text-white transition-all"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-themeCard border border-themeSecondary/50 flex items-center justify-center text-[#ff9c00] hover:bg-themeAccent hover:text-white transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+
+                <!-- Shortcuts Link Column -->
+                <div class="md:col-span-3 space-y-4">
+                    <h5 class="text-sm font-bold text-white uppercase tracking-wider">Tautan Berguna</h5>
+                    <ul class="space-y-2 text-xs text-themeMutedText">
+                        <li><a href="#beranda" class="hover:text-themeAccent transition-colors">Beranda Utama</a></li>
+                        <li><a href="#profil" class="hover:text-themeAccent transition-colors">Visi & Misi</a></li>
+                        <li><a href="#jurusan" class="hover:text-themeAccent transition-colors">Program Studi</a></li>
+                        <li><a href="#prestasi" class="hover:text-themeAccent transition-colors">Galeri Prestasi</a></li>
+                        <li><a href="#ppdb" class="hover:text-themeAccent transition-colors">Penerimaan Siswa Baru</a></li>
+                    </ul>
+                </div>
+
+                <!-- Subscription Column -->
+                <div class="md:col-span-4 space-y-4">
+                    <h5 class="text-sm font-bold text-white uppercase tracking-wider">Newsletter Sekolah</h5>
+                    <p class="text-xs text-themeMutedText leading-relaxed">Dapatkan informasi berita, agenda sekolah, dan pengumuman penting langsung ke kotak masuk surel Anda.</p>
+                    <div class="flex gap-2">
+                        <input type="email" id="newsletter-email" placeholder="Alamat email Anda..." class="w-full bg-themeDark border border-themeSecondary/50 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-themeAccent transition-all">
+                        <button onclick="handleSubscribe()" class="px-5 py-3 rounded-xl bg-themeAccent hover:bg-themeAccentHover text-white text-xs font-bold shadow-neon transition-all"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom copyrights -->
+            <div class="border-t border-themeSecondary/30 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-themeMutedText space-y-4 sm:space-y-0">
+                <p>&copy; 2026 SMKN 8 Wajo. Hak Cipta Dilindungi Undang-Undang.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:text-themeAccent">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-themeAccent">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE CUSTOM ALERT MODAL -->
+    <div id="custom-modal" class="hidden fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-themeDarker/90 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+        
+        <!-- Modal body -->
+        <div class="relative bg-[#140c1c] border border-themeAccent/30 rounded-3xl p-6 sm:p-8 max-w-lg w-full text-left space-y-4 shadow-neon-strong transform scale-95 transition-all duration-300">
+            <h3 class="text-xl font-bold font-russo text-white tracking-wide" id="modal-title">Judul Berita</h3>
+            <p class="text-sm text-themeMutedText leading-relaxed font-light" id="modal-body">Isi detail berita akan muncul di sini secara lengkap dan informatif.</p>
+            <div class="flex justify-end pt-2">
+                <button onclick="closeModal()" class="px-6 py-2.5 rounded-full bg-themeAccent hover:bg-themeAccentHover text-white font-semibold text-xs tracking-wider transition-all">Tutup Detail</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & INTERACTIONS -->
+    <script>
+        // Preloader control
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.visibility = 'hidden';
+            }, 500);
+        });
+
+        // Sticky & Shrunk Header on scroll
+        const header = document.getElementById('main-header');
+        const headerInner = document.getElementById('header-inner');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('bg-[#0f0715]/90', 'backdrop-blur-md', 'border-b', 'border-themeSecondary/30', 'shadow-neon');
+                headerInner.classList.remove('h-24');
+                headerInner.classList.add('h-16', 'sm:h-18');
+            } else {
+                header.classList.remove('bg-[#0f0715]/90', 'backdrop-blur-md', 'border-b', 'border-themeSecondary/30', 'shadow-neon');
+                headerInner.classList.remove('h-16', 'sm:h-18');
+                headerInner.classList.add('h-24');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                menuIcon.className = 'fa-solid fa-xmark text-xl';
+            }
+        });
+
+        // Hide mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.className = 'fa-solid fa-bars text-xl';
+            });
+        });
+
+        // Department tab switcher data mapping
+        const deptsData = {
+            rpl: {
+                title: 'Rekayasa Perangkat Lunak (RPL)',
+                desc: 'Mempelajari pengembangan perangkat lunak mulai dari pembuatan website, aplikasi mobile, desktop, hingga pengembangan kecerdasan buatan. Siswa dipersiapkan menghadapi tantangan era Web3 dan Revolusi Industri 4.0.',
+                badge: 'Paling Populer',
+                topics: ['Web & Mobile Dev', 'Database Management', 'UI/UX Design', 'OOP Programming'],
+                jobs: ['Fullstack Web Developer', 'Mobile Engineer', 'UI/UX Designer', 'Software QA'],
+                image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=500'
+            },
+            tkj: {
+                title: 'Teknik Komputer & Jaringan (TKJ)',
+                desc: 'Fokus pada keahlian perancangan jaringan komputer modern, instalasi server, administrasi jaringan berskala besar, cybersecurity, serta troubleshooting perangkat keras jaringan tingkat mahir.',
+                badge: 'Sertifikasi Mikrotik',
+                topics: ['Network Administration', 'Cloud Infrastructure', 'Cybersecurity Basics', 'Routing & Switching'],
+                jobs: ['Network Engineer', 'System Administrator', 'Technical Support Specialist', 'Cloud Operator'],
+                image: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=500'
+            },
+            akl: {
+                title: 'Akuntansi & Keuangan Lembaga (AKL)',
+                desc: 'Mengembangkan kecerdasan finansial untuk mengelola keuangan korporat, perpajakan, audit independen, serta pengoperasian sistem akuntansi terkomputerisasi yang modern.',
+                badge: 'Peluang Kerja Luas',
+                topics: ['Financial Accounting', 'Corporate Taxation', 'Spreadsheet Expert', 'Digital Ledger auditing'],
+                jobs: ['Financial Auditor', 'Tax Consultant Assistant', 'Corporate Accountant', 'Bank Teller'],
+                image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=500'
+            },
+            tbsm: {
+                title: 'Teknik Bisnis Sepeda Motor (TBSM)',
+                desc: 'Pembelajaran spesifik tentang permesinan sepeda motor modern, sistem kelistrikan injeksi, mekanika sasis berkinerja tinggi, serta manajemen pengelolaan bengkel profesional mandiri.',
+                badge: 'Binaan Honda Astra',
+                topics: ['Engine Tune-up Injection', 'Electrical Diagnostics', 'Transmission Repair', 'Workshop Management'],
+                jobs: ['Astra Honda Mechanic', 'Workshop Owner / Entrepreneur', 'Automotive Parts Advisor', 'Service Supervisor'],
+                image: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80&w=500'
+            }
+        };
+
+        function switchDepartment(key) {
+            // Update Tab active state visual
+            document.querySelectorAll('.dept-tab-btn').forEach(btn => {
+                btn.className = 'dept-tab-btn px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border border-themeSecondary/50 bg-[#140c1c] text-themeMutedText hover:border-themeAccent/50';
+            });
+            const activeTab = document.getElementById(`tab-${key}`);
+            activeTab.className = 'dept-tab-btn active px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 border border-themeAccent bg-themeAccent text-white shadow-neon';
+
+            // Get target data
+            const data = deptsData[key];
+
+            // Animate transition out
+            const container = document.getElementById('dept-display-container');
+            container.style.opacity = '0.3';
+            container.style.transform = 'scale(0.98)';
+
+            setTimeout(() => {
+                // Swap Text contents
+                document.getElementById('dept-title').innerText = data.title;
+                document.getElementById('dept-desc').innerText = data.desc;
+                document.getElementById('dept-badge').innerText = data.badge;
+
+                // Build Topics Elements
+                const topicsCont = document.getElementById('dept-topics');
+                topicsCont.innerHTML = '';
+                data.topics.forEach(topic => {
+                    topicsCont.innerHTML += `<div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-themeAccent"></i> ${topic}</div>`;
+                });
+
+                // Build Jobs Elements
+                const jobsCont = document.getElementById('dept-jobs');
+                jobsCont.innerHTML = '';
+                data.jobs.forEach(job => {
+                    jobsCont.innerHTML += `<span class="px-3 py-1 bg-themeSecondary/50 text-themeLightText rounded-md border border-themeAccent/20">${job}</span>`;
+                });
+
+                // Swap Image
+                const imgElement = document.getElementById('dept-image');
+                imgElement.src = data.image;
+                imgElement.onerror = function() {
+                    this.src = `https://placehold.co/500x500/140c1c/8750f7?text=${encodeURIComponent(data.title)}`;
+                };
+
+                // Animate back in
+                container.style.opacity = '1';
+                container.style.transform = 'scale(1)';
+            }, 300);
+        }
+
+        // PPDB Calculator Logic
+        function calculatePPDB() {
+            const mat = parseFloat(document.getElementById('val-mat').value);
+            const ing = parseFloat(document.getElementById('val-ing').value);
+            const ipa = parseFloat(document.getElementById('val-ipa').value);
+            const ind = parseFloat(document.getElementById('val-ind').value);
+            const selectedDept = document.getElementById('sim-dept-select').value;
+
+            // Simple validation
+            if (isNaN(mat) || isNaN(ing) || isNaN(ipa) || isNaN(ind)) {
+                alertModal('Input Nilai Tidak Lengkap', 'Silakan isi seluruh bidang nilai rapor terlebih dahulu sebelum menghitung peluang kelayakan.');
+                return;
+            }
+
+            if (mat < 0 || mat > 100 || ing < 0 || ing > 100 || ipa < 0 || ipa > 100 || ind < 0 || ind > 100) {
+                alertModal('Nilai Tidak Valid', 'Silakan masukkan nilai raport dengan rentang angka antara 0 hingga 100.');
+                return;
+            }
+
+            // Calculation
+            const average = (mat + ing + ipa + ind) / 4;
+            const avgFormatted = average.toFixed(1);
+
+            // Minimum required scores based on department selection
+            const thresholds = { rpl: 80, tkj: 78, akl: 75, tbsm: 73 };
+            const requiredMin = thresholds[selectedDept];
+
+            const scoreValEl = document.getElementById('sim-score-val');
+            const statusBadgeEl = document.getElementById('sim-status-badge');
+            const feedbackTextEl = document.getElementById('sim-feedback-text');
+            const scoreBorderEl = document.getElementById('sim-score-border');
+
+            scoreValEl.innerText = avgFormatted;
+
+            // Show interactive active panel
+            document.getElementById('sim-result-default').classList.add('hidden');
+            document.getElementById('sim-result-active').classList.remove('hidden');
+
+            if (average >= requiredMin) {
+                // Meet Requirement
+                statusBadgeEl.innerText = 'MEMENUHI SYARAT';
+                statusBadgeEl.className = 'px-4 py-1.5 rounded-full text-xs font-bold bg-[#ff9c00]/20 text-themeGold border border-[#ff9c00]/30 inline-block';
+                feedbackTextEl.innerText = `Selamat! Nilai rata-rata Anda (${avgFormatted}) melampaui batas standar kelayakan jurusan (${requiredMin}) untuk program ${deptsData[selectedDept].title}.`;
+                scoreBorderEl.className = 'mx-auto w-32 h-32 rounded-full flex items-center justify-center border-4 border-themeGold shadow-gold-glow';
+            } else {
+                // Fail to meet
+                statusBadgeEl.innerText = 'BELUM MEMENUHI';
+                statusBadgeEl.className = 'px-4 py-1.5 rounded-full text-xs font-bold bg-red-500/20 text-red-400 border border-red-500/30 inline-block';
+                feedbackTextEl.innerText = `Nilai rata-rata Anda (${avgFormatted}) belum mencukupi standar kelayakan program ${deptsData[selectedDept].title} (${requiredMin}). Kami menyarankan Anda memilih jurusan alternatif atau meningkatkan nilai Anda.`;
+                scoreBorderEl.className = 'mx-auto w-32 h-32 rounded-full flex items-center justify-center border-4 border-red-500/30';
+            }
+        }
+
+        // Contact Submit handler simulation
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alertModal('Pesan Terkirim', 'Terima kasih telah menghubungi SMKN 8 Wajo. Pesan Anda telah kami terima dan tim representatif kami akan menindaklanjutinya secepat mungkin.');
+            e.target.reset();
+        }
+
+        // Newsletter subscription simulator
+        function handleSubscribe() {
+            const email = document.getElementById('newsletter-email').value;
+            if (!email || !email.includes('@')) {
+                alertModal('Alamat Email Tidak Valid', 'Silakan masukkan alamat email yang benar untuk berlangganan newsletter sekolah.');
+                return;
+            }
+            alertModal('Pendaftaran Berhasil', 'Terima kasih! Anda kini terdaftar sebagai pelanggan buletin berita berkala SMKN 8 Wajo.');
+            document.getElementById('newsletter-email').value = '';
+        }
+
+        // Custom Modal utility (Since alert/confirm are prohibited)
+        function alertModal(title, bodyText) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerText = bodyText;
+            const modal = document.getElementById('custom-modal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('custom-modal');
+            modal.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
